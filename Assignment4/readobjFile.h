@@ -1,7 +1,3 @@
-//This header file contains function to read the House.obj file and initialise the object
-//The parser requires obj file to have vertex, vertex normal and vertex texture information
-
-//object data class initialised after reading from House.obj
 class objectData{
 public:
 	float vertex[3];
@@ -43,21 +39,21 @@ void initialiseObject(){
 	while(!(feof(filePointer))){
 		fscanf(filePointer,"%s",line);
 		//check for only 'v'
-		if(line[0] == 'v' && line[1] == '\0'){
+		if(strcmp(line,"v") == 0){
 			for(i=0;i<3;i++){
 				fscanf(filePointer,"%f",&vertexTemp);
 				vertex.push_back(vertexTemp);
 			}
 		}
 		//check for 'vn'
-		else if(line[0]=='v'&&line[1]=='n'){
+		else if(strcmp(line,"vn") == 0){
 			for(i=0;i<3;i++){
 				fscanf(filePointer,"%f",&vertexNormalTemp);
 				vertexNormal.push_back(vertexNormalTemp);
 			}
 		}
 		//check for 'vt'
-		else if(line[0]=='v'&&line[1]=='t'){
+		else if(strcmp(line,"vt") == 0){
 			for(i=0;i<3;i++){
 				fscanf(filePointer,"%f",&vertexTextureTemp);	
 				vertexTexture.push_back(vertexTextureTemp);
@@ -79,7 +75,7 @@ void drawObject(){
 	while(!(feof(filePointer2))){	
 		fscanf(filePointer2,"%s",line);
 		//read frames
-		if(line[0]=='f' && strlen(line)==1){	
+		if(strcmp(line,"f") == 0){	
 			for(i=0;i<3;i++){
 				int v,vt,vn;
 				int val=fscanf(filePointer2,"%d/%d/%d",&v,&vt,&vn);
